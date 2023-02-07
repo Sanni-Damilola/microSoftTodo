@@ -6,6 +6,29 @@ import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { Link } from "react-router-dom";
 
 const SignUp = () => {
+  const [email, setEmail] = React.useState("");
+  const [fullName, setFullName] = React.useState("");
+  const [password, setPassword] = React.useState("");
+
+  const navigate = useNavigate();
+  const registerUser = async (e: any) => {
+    e.preventDefault();
+    await axios
+      .post("http://localhost:2001/api/post", {
+        name: fullName,
+        email,
+        password,
+      })
+      .then((res) => {
+        let captureData = window.localStorage.setItem(
+          "microSoftData",
+          JSON.stringify(res.data.data)
+        );
+        navigate("/signin");
+        console.log(captureData);
+      });
+  };
+
   const [input, setInput] = React.useState(false);
   const eye = () => {
     setInput(!input);

@@ -198,30 +198,7 @@ const Wrap = styled.div`
     left: 10%;
   }
 `;
-const Suggestions = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-`;
-const Sort = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-`;
-const Text = styled.span`
-  text-transform: capitalize;
-  font-size: 16px;
-  font-weight: 400;
-  margin-right: 45px;
-`;
-const SortWrapAndSuggest = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: rgb(37, 99, 207);
-`;
+
 const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;

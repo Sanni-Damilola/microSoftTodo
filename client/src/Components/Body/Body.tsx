@@ -190,7 +190,7 @@ const Body = () => {
               <Hol>
                 <textarea placeholder="Edited..." />
                 <button>Update</button>
-                <span>Sunday, January 15</span>
+                <span>{new Date().toDateString()}</span>
               </Hol>
             </Card>
           </MainCont>
