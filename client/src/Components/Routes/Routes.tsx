@@ -1,11 +1,13 @@
-import React from 'react'
+import React, {} from 'react'
 
 const Routes = () => {
-  return (
-    <div>
-      allroutes
-    </div>
-  )
+
+  const element = ([
+    {}
+  ])
+
+  return element
+  
 }
 
 export default Routes
