@@ -2,6 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import Header from "../Header/Header";
 import { HiOutlineSun } from "react-icons/hi";
+import { AiOutlineMenu } from "react-icons/ai";
+import { BsStar } from "react-icons/bs";
+import { IoCalendarOutline } from "react-icons/io5";
+import { MdOutlinePersonOutline } from "react-icons/md";
+import { CgHome } from "react-icons/cg";
+import Routes from "../Routes/Routes";
 
 const Body = () => {
   const [show, setShow] = React.useState(false);
@@ -9,20 +15,110 @@ const Body = () => {
     setShow(!show);
   };
 
+  const [route, setRoute] = React.useState(false);
+  const taskRoute = () => {
+    setRoute(true);
+    setImportanat(false);
+    setAssigned(false);
+    setMainTask(false);
+    setIPlanned(false);
+  };
+
+  const [importantRoute, setImportanat] = React.useState(false);
+  const importantTask = () => {
+    setRoute(false);
+    setImportanat(true);
+    setAssigned(false);
+    setMainTask(false);
+    setIPlanned(false);
+  };
+
+  const [plannedRoute, setIPlanned] = React.useState(false);
+  const plannedFunction = () => {
+    setRoute(false);
+    setImportanat(false);
+    setAssigned(false);
+    setMainTask(false);
+    setIPlanned(true);
+  };
+
+  const [assignedRoute, setAssigned] = React.useState(false);
+  const assignedFunction = () => {
+    setRoute(false);
+    setImportanat(false);
+    setAssigned(true);
+    setMainTask(false);
+    setIPlanned(false);
+  };
+
+  const [mainRoute, setMainTask] = React.useState(true);
+  const mainTask = () => {
+    setRoute(false);
+    setImportanat(false);
+    setAssigned(false);
+    setMainTask(true);
+    setIPlanned(false);
+  };
+
   return (
     <Container>
       <Header />
+      <ToggleMenu onClick={func} dn={show ? "" : "value"}>
+        <AiOutlineMenu />
+      </ToggleMenu>
       <Wrapper>
-        <Right dn={show ? "" : "value"}>
-          <Wrap>
-            <BlueLine></BlueLine>
+        <Right dn={show ? "value" : ""}>
+          <Menu onClick={func}>
+            <AiOutlineMenu />
+          </Menu>
+          <Wrap background={route ? "value" : ""} onClick={taskRoute}>
+            <BlueLine b={route ? "value" : ""}></BlueLine>
             <Icon>
               <HiOutlineSun />
             </Icon>
             <TaskTitle>My Day</TaskTitle>
           </Wrap>
+          <Wrap
+            background={importantRoute ? "value" : ""}
+            onClick={importantTask}
+          >
+            <BlueLine b={importantRoute ? "value" : ""}></BlueLine>
+            <Icon>
+              <BsStar />
+            </Icon>
+            <TaskTitle>important</TaskTitle>
+          </Wrap>
+          <Wrap
+            background={plannedRoute ? "value" : ""}
+            onClick={plannedFunction}
+          >
+            <BlueLine b={plannedRoute ? "value" : ""}></BlueLine>
+            <Icon>
+              <IoCalendarOutline />
+            </Icon>
+            <TaskTitle>planned</TaskTitle>
+          </Wrap>
+          <Wrap
+            background={plannedRoute ? "value" : ""}
+            onClick={assignedFunction}
+          >
+            <BlueLine b={assignedRoute ? "value" : ""}></BlueLine>
+            <Icon>
+              <MdOutlinePersonOutline />
+            </Icon>
+            <TaskTitle>assigned to me</TaskTitle>
+          </Wrap>
+          <Wrap background={mainRoute ? "value" : ""} onClick={mainTask}>
+            <BlueLine b={mainRoute ? "value" : ""}></BlueLine>
+            <Icon>
+              <CgHome />
+            </Icon>
+            <TaskTitle>Task</TaskTitle>
+          </Wrap>
         </Right>
-        <Middle></Middle>
+        <Middle>
+          <Routes />
+        </Middle>
         <Left></Left>
       </Wrapper>
     </Container>
@@ -32,23 +128,22 @@ const Body = () => {
 export default Body;
 
 const Right = styled.div<{ dn: string }>`
-  width: 400px;
+  width: 280px;
   height: calc(100vh - 55px);
   display: ${({ dn }) => (dn ? "block" : "none")};
-  /* background-color: rgb(255, 255, 255); */
-  background-color: red;
+  background-color: rgb(255, 255, 255);
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
   margin-right: 5px;
   flex-direction: column;
   overflow: hidden;
 `;
 
-const BlueLine = styled.div`
+const BlueLine = styled.div<{ b: string }>`
   width: 1.6px;
   margin-left: 1px;
   float: left;
   height: 100%;
-  background-color: "rgb(37, 99, 207)";
+  background-color: ${({ b }) => (b ? "rgb(37, 99, 207)" : "")};
 `;
 
 const TaskTitle = styled.span`
@@ -65,13 +160,14 @@ const Icon = styled.div`
   margin-right: 23px;
   margin-top: 5px;
 `;
-const Wrap = styled.div`
+const Wrap = styled.div<{ background: string }>`
   display: flex;
   margin-top: 10px;
   align-items: center;
   width: 100%;
   height: 45px;
-  background-color: "rgb(239, 246, 252)";
+  background-color: ${({ background }) =>
+    background ? "rgb(239, 246, 252)" : ""};
   cursor: pointer;
   :hover {
     background-color: lavender;
@@ -92,4 +188,21 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+`;
+
+const ToggleMenu = styled.div<{ dn: string }>`
+  padding-left: 30px;
+  margin-top: 35px;
+  font-size: 20px;
+  color: rgb(0, 0, 0, 0.7);
+  display: ${({ dn }) => (dn ? "block" : "none")};
+  cursor: pointer;
+`;
+
+const Menu = styled.div`
+  padding-left: 30px;
+  margin-top: 35px;
+  font-size: 20px;
+  color: rgb(0, 0, 0, 0.7);
+  cursor: pointer;
 `;
