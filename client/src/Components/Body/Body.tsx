@@ -11,10 +11,8 @@ import Routes from "../Routes/Routes";
 import { Link } from "react-router-dom";
 import { AiOutlineBell } from "react-icons/ai";
 import { CiRepeat } from "react-icons/ci";
-import { MdOutlineLocalOffer } from "react-icons/md";
 import { TiAttachment } from "react-icons/ti";
 import { BiCalendar } from "react-icons/bi";
-import { GlobalContext } from "../Global/Global";
 import { FaRegUserCircle } from "react-icons/fa";
 
 const Body = () => {
@@ -259,13 +257,28 @@ const Middle = styled.div`
 `;
 const Left = styled.div`
   width: 430px;
-  display: none;
+  display: flex;
   height: calc(100vh - 55px);
   margin-left: 6px;
   float: right;
-  /* background-color: rgb(255, 255, 255); */
-  background-color: red;
+  background-color: rgb(255, 255, 255);
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+  button {
+    background-color: #8a8aff;
+    height: 30px;
+    width: 120px;
+    color: white;
+    outline: none;
+    border: none;
+    cursor: pointer;
+  }
+  input {
+    height: 30px;
+    width: 80%;
+    margin-bottom: 10px;
+    padding-left: 10px;
+  }
 `;
 
 const Container = styled.div`
@@ -329,6 +342,10 @@ const Hol = styled.div`
   span {
     font-size: 10px;
   }
+
+  button {
+    margin-bottom: 20px;
+  }
 `;
 
 const IconHold = styled.div`
@@ -352,6 +369,7 @@ const MainCont = styled.div`
 const Card = styled.div`
   height: 40px;
   width: 90%;
+  cursor: pointer;
   background-color: white;
   display: flex;
   align-items: center;
