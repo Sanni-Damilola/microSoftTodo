@@ -17,6 +17,10 @@ import { FaRegUserCircle } from "react-icons/fa";
 
 const Body = () => {
   const [show, setShow] = React.useState(false);
+  const [assignedInput, setAssignedInput] = React.useState(false);
+  const assignedFunctionInput = () => {
+    setAssigned(!assignedInput);
+  };
   const func = () => {
     setShow(!show);
   };
@@ -136,60 +140,60 @@ const Body = () => {
           <Routes />
         </Middle>
         <Left>
-          <Cont>
-            <MainCont>
-              <Card>
-                <IconHold>
-                  <input type="" />
-                </IconHold>
-              </Card>
-              <Card>
-                <IconHold>
-                  <BiCalendar />
-                </IconHold>
-                <span>Due</span>
-              </Card>
-              <Card>
-                <IconHold>
-                  <AiOutlineBell />
-                </IconHold>
-                <span>Remaind Me</span>
-              </Card>
-              <Card>
-                <IconHold>
-                  <CiRepeat />
-                </IconHold>
-                <span>Repeat</span>
-              </Card>
-              <Card>
-                <IconHold>
-                  <FaRegUserCircle />
-                </IconHold>
-                <span style={{ cursor: "pointer" }}>Assigned Task</span>
+          <MainCont>
+            <Card>
+              <IconHold>
+                <input type="" />
+              </IconHold>
+            </Card>
+            <Card>
+              <IconHold>
+                <BiCalendar />
+              </IconHold>
+              <span>Due</span>
+            </Card>
+            <Card>
+              <IconHold>
+                <AiOutlineBell />
+              </IconHold>
+              <span>Remaind Me</span>
+            </Card>
+            <Card>
+              <IconHold>
+                <CiRepeat />
+              </IconHold>
+              <span>Repeat</span>
+            </Card>
+            <Card onClick={assignedFunctionInput}>
+              <IconHold>
+                <FaRegUserCircle />
+              </IconHold>
+              <span style={{ cursor: "pointer" }}>Assigned Task</span>
+              {assignedInput ? (
                 <UserAssignCard>
                   <input placeholder="Enter user Email " />
                   <button>Assign Task</button>
                 </UserAssignCard>
-              </Card>
-              <Card>
-                <IconHold>
-                  <TiAttachment />
-                </IconHold>
-                <span>Add File</span>
-              </Card>
-              <Card
-                style={{
-                  flex: 1,
-                }}
-              >
-                <Hol>
-                  <textarea placeholder="Edited..." />
-                  <button>Update</button>
-                  <span>Sunday, January 15</span>
-                </Hol>
-              </Card>
-            </MainCont>
-          </Cont>
+              ) : null}
+            </Card>
+            <Card>
+              <IconHold>
+                <TiAttachment />
+              </IconHold>
+              <span>Add File</span>
+            </Card>
+            <Card
+              style={{
+                flex: 1,
+              }}
+            >
+              <Hol>
+                <textarea placeholder="Edited..." />
+                <button>Update</button>
+                <span>Sunday, January 15</span>
+              </Hol>
+            </Card>
+          </MainCont>
         </Left>
       </Wrapper>
     </Container>
@@ -256,7 +260,7 @@ const Middle = styled.div`
   height: calc(100vh - 55px);
 `;
 const Left = styled.div`
-  width: 430px;
+  width: 410px;
   display: flex;
   height: calc(100vh - 55px);
   margin-left: 6px;
@@ -340,7 +344,7 @@ const Hol = styled.div`
   display: flex;
   flex-direction: column;
   span {
-    font-size: 10px;
+    font-size: 17px;
   }
 
   button {
@@ -358,7 +362,6 @@ const IconHold = styled.div`
   }
 `;
 const MainCont = styled.div`
-  height: 100%;
   width: 100%;
   display: flex;
   /* justify-content: center; */
@@ -385,12 +388,4 @@ const Card = styled.div`
     resize: none;
     width: 230px;
   }
-`;
-
-const Cont = styled.div`
-  height: 100vh;
-  position: fixed;
-  /* background-color: white; */
-  width: 300px;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 `;
