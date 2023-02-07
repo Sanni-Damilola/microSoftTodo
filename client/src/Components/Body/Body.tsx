@@ -9,6 +9,13 @@ import { MdOutlinePersonOutline } from "react-icons/md";
 import { CgHome } from "react-icons/cg";
 import Routes from "../Routes/Routes";
 import { Link } from "react-router-dom";
+import { AiOutlineBell } from "react-icons/ai";
+import { CiRepeat } from "react-icons/ci";
+import { MdOutlineLocalOffer } from "react-icons/md";
+import { TiAttachment } from "react-icons/ti";
+import { BiCalendar } from "react-icons/bi";
+import { GlobalContext } from "../Global/Global";
+import { FaRegUserCircle } from "react-icons/fa";
 
 const Body = () => {
   const [show, setShow] = React.useState(false);
@@ -130,7 +137,62 @@ const Body = () => {
         <Middle>
           <Routes />
         </Middle>
-        <Left></Left>
+        <Left>
+          <Cont>
+            <MainCont>
+              <Card>
+                <IconHold>
+                  <input type="" />
+                </IconHold>
+              </Card>
+              <Card>
+                <IconHold>
+                  <BiCalendar />
+                </IconHold>
+                <span>Due</span>
+              </Card>
+              <Card>
+                <IconHold>
+                  <AiOutlineBell />
+                </IconHold>
+                <span>Remaind Me</span>
+              </Card>
+              <Card>
+                <IconHold>
+                  <CiRepeat />
+                </IconHold>
+                <span>Repeat</span>
+              </Card>
+              <Card>
+                <IconHold>
+                  <FaRegUserCircle />
+                </IconHold>
+                <span style={{ cursor: "pointer" }}>Assigned Task</span>
+                <UserAssignCard>
+                  <input placeholder="Enter user Email " />
+                  <button>Assign Task</button>
+                </UserAssignCard>
+              </Card>
+              <Card>
+                <IconHold>
+                  <TiAttachment />
+                </IconHold>
+                <span>Add File</span>
+              </Card>
+              <Card
+                style={{
+                  flex: 1,
+                }}
+              >
+                <Hol>
+                  <textarea placeholder="Edited..." />
+                  <button>Update</button>
+                  <span>Sunday, January 15</span>
+                </Hol>
+              </Card>
+            </MainCont>
+          </Cont>
+        </Left>
       </Wrapper>
     </Container>
   );
@@ -188,18 +250,19 @@ const Wrap = styled.div<{ background: string }>`
 const Wrapper = styled.div`
   display: flex;
   width: 100%;
+  justify-content: space-between;
   align-items: center;
 `;
 const Middle = styled.div`
-  width: 50%;
-  /* background-color: ; */
+  width: 70%;
   height: calc(100vh - 55px);
 `;
 const Left = styled.div`
-  width: 470px;
-  display: flex;
+  width: 430px;
+  display: none;
   height: calc(100vh - 55px);
   margin-left: 6px;
+  float: right;
   /* background-color: rgb(255, 255, 255); */
   background-color: red;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -217,7 +280,7 @@ const ToggleMenu = styled.div<{ dn: string }>`
   margin-top: 35px;
   position: fixed;
   left: 0;
-  top: 40px;
+  top: 35px;
   font-size: 20px;
   color: rgb(0, 0, 0, 0.7);
   display: ${({ dn }) => (dn ? "block" : "none")};
@@ -230,4 +293,86 @@ const Menu = styled.div`
   font-size: 20px;
   color: rgb(0, 0, 0, 0.7);
   cursor: pointer;
+`;
+
+const UserAssignCard = styled.div`
+  position: absolute;
+  height: 100px;
+  width: 230px;
+  top: 40px;
+  background-color: white;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  button {
+    background-color: #8a8aff;
+    height: 30px;
+    width: 120px;
+    color: white;
+    outline: none;
+    border: none;
+  }
+  input {
+    height: 30px;
+    width: 80%;
+    margin-bottom: 10px;
+    padding-left: 10px;
+  }
+`;
+
+const Hol = styled.div`
+  display: flex;
+  flex-direction: column;
+  span {
+    font-size: 10px;
+  }
+`;
+
+const IconHold = styled.div`
+  margin-right: 10px;
+  input {
+    border: none;
+    outline: none;
+    height: 100%;
+    width: 100%;
+  }
+`;
+const MainCont = styled.div`
+  height: 100%;
+  width: 100%;
+  display: flex;
+  /* justify-content: center; */
+  margin-top: 70px;
+  flex-direction: column;
+  align-items: center;
+`;
+const Card = styled.div`
+  height: 40px;
+  width: 90%;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  position: relative;
+  textarea {
+    /* flex: 1; */
+    min-height: 200px;
+    outline: none;
+    border: none;
+    resize: none;
+    width: 230px;
+  }
+`;
+
+const Cont = styled.div`
+  height: 100vh;
+  position: fixed;
+  /* background-color: white; */
+  width: 300px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 `;
