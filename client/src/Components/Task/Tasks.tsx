@@ -5,6 +5,26 @@ import { IoCalendarOutline, IoRepeat } from "react-icons/io5";
 import { BsStar } from "react-icons/bs";
 import { IoIosCheckmark } from "react-icons/io";
 import { CgHome } from "react-icons/cg";
+import axios from "axios";
+import { allowAccess } from "../Global/GlobalContext";
+
+type task = {
+  _id: string;
+  title: string;
+  date: number;
+  reminder: string;
+  note: string;
+  status: boolean;
+};
+
+interface allUserTask {
+  status: false;
+  title: string;
+  note: string;
+  myDay: task[];
+  task: task[];
+  _id: string;
+}
 
 const Tasks = () => {
   const [show, setShow] = React.useState(false);
@@ -12,6 +32,59 @@ const Tasks = () => {
   const func = () => {
     setShow(true);
   };
+
+  const [title, setTitle] = React.useState("");
+
+  const context = React.useContext(allowAccess);
+
+  // post task
+  const postTask = async () => {
+    await axios
+      .post(`http://localhost:2001/api/createTask/${context?.userData._id}`, {
+        title,
+      })
+      .then((res) => {});
+  };
+
+  // read task
+  // get all task
+  const [userTask, setUserTask] = React.useState({} as allUserTask);
+  const readAllTask = async () => {
+    await axios
+      .get(`http://localhost:2001/api/getone/${context?.userData._id}`)
+      .then((res) => {
+        setUserTask(res.data.data);
+      });
+  };
+
+  // border for Date Icon
+  const [border, setBorder] = React.useState(false);
+
+  // done status
+  const completed = async (id: string) => {
+    await axios
+      .patch(
+        `http://localhost:2001/api/completeTask/${context?.userData._id}/${id}`
+      )
+      .then((res) => {
+        window.location.reload();
+      });
+  };
+
+  // unDone Task
+  const Uncompleted = async (id: string) => {
+    await axios
+      .patch(
+        `http://localhost:2001/api/uncompleteTask/${context?.userData._id}/${id}`
+      )
+      .then((res) => {
+        window.location.reload();
+      });
+  };
+
+  React.useEffect(() => {
+    readAllTask();
+  }, [context?.userData]);
 
   return (
     <Container>
@@ -25,64 +98,76 @@ const Tasks = () => {
       </Wrapper>
       <br />
       <br />
-      <AddTaskInput>
-        <Radio></Radio>
-        <Input
-          onChange={(e) => {
-            setText(e.target.value);
-          }}
-          color={show ? "value" : ""}
-          onClick={func}
-          placeholder="Add a Task"
-        />
-      </AddTaskInput>
-      {show ? (
-        <>
-          <Botton>
-            <Hold>
-              <ButtonIcon>
-                <IoCalendarOutline />
-              </ButtonIcon>
-              <ButtonIcon>
-                <HiOutlineBell />
-              </ButtonIcon>
-              <ButtonIcon>
-                <IoRepeat />
-              </ButtonIcon>
-            </Hold>
-            {text === "" ? (
-              <Add color=" rgb(0, 0, 0, 0.5)" cur="not-allowed">
-                add
-              </Add>
-            ) : (
-              <Add color="rgb(37, 99, 207)" cur="pointer">
-                add
-              </Add>
-            )}
-          </Botton>
-        </>
-      ) : null}
-      <TaskView>
-        <ViewWrapper>
-          <CheckBox>
-            <CheckIcon>
-              <IoIosCheckmark />
-            </CheckIcon>
-          </CheckBox>
-          <TitleHold>
-            <TaskViewTitle>anshb</TaskViewTitle>
-            <Task>task</Task>
-          </TitleHold>
-        </ViewWrapper>
-        <MarkAsImportant>
-          <BsStar />
-        </MarkAsImportant>
-      </TaskView>
+      <MainWrapper>
+        <AddTaskInput>
+          <Radio></Radio>
+          <Input
+            onChange={(e) => {
+              setText(e.target.value);
+            }}
+            color={show ? "value" : ""}
+            onClick={func}
+            placeholder="Add a Task"
+          />
+        </AddTaskInput>
+        {show ? (
+          <>
+            <Botton>
+              <Hold>
+                <ButtonIcon>
+                  <IoCalendarOutline />
+                </ButtonIcon>
+                <ButtonIcon>
+                  <HiOutlineBell />
+                </ButtonIcon>
+                <ButtonIcon>
+                  <IoRepeat />
+                </ButtonIcon>
+              </Hold>
+              {text === "" ? (
+                <Add color=" rgb(0, 0, 0, 0.5)" cur="not-allowed">
+                  add
+                </Add>
+              ) : (
+                <Add color="rgb(37, 99, 207)" cur="pointer">
+                  add
+                </Add>
+              )}
+            </Botton>
+          </>
+        ) : null}
+        <TaskView>
+          <ViewWrapper>
+            <CheckBox>
+              <CheckIcon>
+                <IoIosCheckmark />
+              </CheckIcon>
+            </CheckBox>
+            <TitleHold>
+              <TaskViewTitle>anshb</TaskViewTitle>
+              <Task>task</Task>
+            </TitleHold>
+          </ViewWrapper>
+          <MarkAsImportant>
+            <BsStar />
+          </MarkAsImportant>
+        </TaskView>
+      </MainWrapper>
     </Container>
   );
 };
 
 export default Tasks;
+
+const MainWrapper = styled.div`
+  overflow-y: scroll;
+  height: auto;
+  width: 100%;
+  padding-bottom: 20px;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+`;
 
 const TaskViewTitle = styled.span`
   color: rgb(0, 0, 0, 0.6);
