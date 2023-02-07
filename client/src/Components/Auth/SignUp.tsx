@@ -16,7 +16,7 @@ const SignIn = () => {
         <span>Sign in</span>
         <br />
         <br />
-        <Input required type="email" placeholder="someone@example.com" /> <br />
+        <Input required type="email" placeholder="dami@example.com" /> <br />
         <br />
         <br />
         <CreatAccoount>

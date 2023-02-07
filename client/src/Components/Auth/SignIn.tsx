@@ -25,7 +25,7 @@ const SignIn = () => {
         <br />
         <br />
         <Input type="text" minLength={6} placeholder="name" /> <br />
-        <Input required type="email" placeholder="someone@example.com" /> <br />
+        <Input required type="email" placeholder="sanni@example.com" /> <br />
         <Password>
           <PasswordInput
             required
