@@ -4,6 +4,7 @@ import styled from "styled-components";
 import img from "../Images/image.svg";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const SignUp = () => {
   const [email, setEmail] = React.useState("");
