@@ -133,7 +133,7 @@ const Hold = styled.div`
   position: relative;
   width: 300px;
 `;
-const Icon = styled.div<{ dp: string }>`
+const Icon = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
