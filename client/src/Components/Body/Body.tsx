@@ -14,6 +14,7 @@ import { CiRepeat } from "react-icons/ci";
 import { TiAttachment } from "react-icons/ti";
 import { BiCalendar } from "react-icons/bi";
 import { FaRegUserCircle } from "react-icons/fa";
+import { GoSignOut } from "react-icons/go";
 
 const Body = () => {
   const [show, setShow] = React.useState(false);
@@ -135,6 +136,14 @@ const Body = () => {
               <TaskTitle>Task</TaskTitle>
             </Wrap>
           </Link>
+          <Link style={{ textDecoration: "none" }} to={"/"}>
+            <LogOut background="">
+              <Icon>
+                <GoSignOut />
+              </Icon>
+              <TaskTitle>Log Out</TaskTitle>
+            </LogOut>
+          </Link>
         </Right>
         <Middle>
           <Routes />
@@ -241,6 +250,21 @@ const Wrap = styled.div<{ background: string }>`
   align-items: center;
   width: 100%;
   height: 45px;
+  background-color: ${({ background }) =>
+    background ? "rgb(239, 246, 252)" : ""};
+  cursor: pointer;
+  :hover {
+    background-color: lavender;
+  }
+`;
+const LogOut = styled.div<{ background: string }>`
+  display: flex;
+  margin-top: 10px;
+  align-items: center;
+  padding: 10px;
+  height: 45px;
+  position: absolute;
+  bottom: 20px;
   background-color: ${({ background }) =>
     background ? "rgb(239, 246, 252)" : ""};
   cursor: pointer;
