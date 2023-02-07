@@ -75,7 +75,7 @@ const Body = () => {
           <Link style={{ textDecoration: "none" }} to={"/myday"}>
             <Wrap background={route ? "value" : ""} onClick={taskRoute}>
               <BlueLine b={route ? "value" : ""}></BlueLine>
-              <Icon>
+              <Icon display={show ? "value" : ""}>
                 <HiOutlineSun />
               </Icon>
               <TaskTitle>My Day</TaskTitle>
@@ -87,7 +87,7 @@ const Body = () => {
               onClick={importantTask}
             >
               <BlueLine b={importantRoute ? "value" : ""}></BlueLine>
-              <Icon>
+              <Icon display={show ? "value" : ""}>
                 <BsStar />
               </Icon>
               <TaskTitle>important</TaskTitle>
@@ -99,7 +99,7 @@ const Body = () => {
               onClick={plannedFunction}
             >
               <BlueLine b={plannedRoute ? "value" : ""}></BlueLine>
-              <Icon>
+              <Icon display={show ? "value" : ""}>
                 <IoCalendarOutline />
               </Icon>
               <TaskTitle>planned</TaskTitle>
@@ -111,7 +111,7 @@ const Body = () => {
               onClick={assignedFunction}
             >
               <BlueLine b={assignedRoute ? "value" : ""}></BlueLine>
-              <Icon>
+              <Icon display={show ? "value" : ""}>
                 <MdOutlinePersonOutline />
               </Icon>
               <TaskTitle>assigned to me</TaskTitle>
@@ -120,7 +120,7 @@ const Body = () => {
           <Link style={{ textDecoration: "none" }} to={"/task"}>
             <Wrap background={mainRoute ? "value" : ""} onClick={mainTask}>
               <BlueLine b={mainRoute ? "value" : ""}></BlueLine>
-              <Icon>
+              <Icon display={show ? "value" : ""}>
                 <CgHome />
               </Icon>
               <TaskTitle>Task</TaskTitle>
@@ -161,8 +161,8 @@ const TaskTitle = styled.span`
   color: rgb(0, 0, 0, 0.8);
   text-transform: capitalize;
 `;
-const Icon = styled.div`
-  display: flex;
+const Icon = styled.div<{ display: string }>`
+  display: ${({ display }) => (display ? "flex" : "none")};
   justify-content: center;
   margin-left: 30px;
   align-items: center;
@@ -187,12 +187,23 @@ const Wrap = styled.div<{ background: string }>`
 
 const Wrapper = styled.div`
   display: flex;
-  justify-content: center;
+  width: 100%;
   align-items: center;
-  justify-content: space-between;
 `;
-const Middle = styled.div``;
-const Left = styled.div``;
+const Middle = styled.div`
+  width: 50%;
+  /* background-color: ; */
+  height: calc(100vh - 55px);
+`;
+const Left = styled.div`
+  width: 470px;
+  display: flex;
+  height: calc(100vh - 55px);
+  margin-left: 6px;
+  /* background-color: rgb(255, 255, 255); */
+  background-color: red;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+`;
 
 const Container = styled.div`
   display: flex;
@@ -204,6 +215,9 @@ const Container = styled.div`
 const ToggleMenu = styled.div<{ dn: string }>`
   padding-left: 30px;
   margin-top: 35px;
+  position: fixed;
+  left: 0;
+  top: 60px;
   font-size: 20px;
   color: rgb(0, 0, 0, 0.7);
   display: ${({ dn }) => (dn ? "block" : "none")};
