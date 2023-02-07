@@ -256,7 +256,7 @@ const Wrapper = styled.div`
   align-items: center;
 `;
 const Middle = styled.div`
-  width: 70%;
+  width: 100%;
   height: calc(100vh - 55px);
 `;
 const Left = styled.div`
