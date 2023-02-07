@@ -3,11 +3,16 @@ import styled from "styled-components";
 import Header from "../Header/Header";
 
 const Body = () => {
+  const [show, setShow] = React.useState(false);
+  const func = () => {
+    setShow(!show);
+  };
+
   return (
     <Container>
       <Header />
       <Wrapper>
-        <Right>
+        <Right dn={show ? "" : "value"}>
           <Container>
             <BlueLine></BlueLine>
             <Icon></Icon>
@@ -23,7 +28,17 @@ const Body = () => {
 
 export default Body;
 
-const Right = styled.div``;
+const Right = styled.div<{ dn: string }>`
+  width: 400px;
+  height: calc(100vh - 55px);
+  display: ${({ dn }) => (dn ? "block" : "none")};
+  /* background-color: rgb(255, 255, 255); */
+  background-color: red;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  margin-right: 5px;
+  flex-direction: column;
+  overflow: hidden;
+`;
 
 const BlueLine = styled.div`
   width: 1.6px;
