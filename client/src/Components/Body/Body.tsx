@@ -8,6 +8,7 @@ import { IoCalendarOutline } from "react-icons/io5";
 import { MdOutlinePersonOutline } from "react-icons/md";
 import { CgHome } from "react-icons/cg";
 import Routes from "../Routes/Routes";
+import { Link } from "react-router-dom";
 
 const Body = () => {
   const [show, setShow] = React.useState(false);
@@ -71,50 +72,60 @@ const Body = () => {
           <Menu onClick={func}>
             <AiOutlineMenu />
           </Menu>
-          <Wrap background={route ? "value" : ""} onClick={taskRoute}>
-            <BlueLine b={route ? "value" : ""}></BlueLine>
-            <Icon>
-              <HiOutlineSun />
-            </Icon>
-            <TaskTitle>My Day</TaskTitle>
-          </Wrap>
-          <Wrap
-            background={importantRoute ? "value" : ""}
-            onClick={importantTask}
-          >
-            <BlueLine b={importantRoute ? "value" : ""}></BlueLine>
-            <Icon>
-              <BsStar />
-            </Icon>
-            <TaskTitle>important</TaskTitle>
-          </Wrap>
-          <Wrap
-            background={plannedRoute ? "value" : ""}
-            onClick={plannedFunction}
-          >
-            <BlueLine b={plannedRoute ? "value" : ""}></BlueLine>
-            <Icon>
-              <IoCalendarOutline />
-            </Icon>
-            <TaskTitle>planned</TaskTitle>
-          </Wrap>
-          <Wrap
-            background={plannedRoute ? "value" : ""}
-            onClick={assignedFunction}
-          >
-            <BlueLine b={assignedRoute ? "value" : ""}></BlueLine>
-            <Icon>
-              <MdOutlinePersonOutline />
-            </Icon>
-            <TaskTitle>assigned to me</TaskTitle>
-          </Wrap>
-          <Wrap background={mainRoute ? "value" : ""} onClick={mainTask}>
-            <BlueLine b={mainRoute ? "value" : ""}></BlueLine>
-            <Icon>
-              <CgHome />
-            </Icon>
-            <TaskTitle>Task</TaskTitle>
-          </Wrap>
+          <Link style={{ textDecoration: "none" }} to={"/myday"}>
+            <Wrap background={route ? "value" : ""} onClick={taskRoute}>
+              <BlueLine b={route ? "value" : ""}></BlueLine>
+              <Icon>
+                <HiOutlineSun />
+              </Icon>
+              <TaskTitle>My Day</TaskTitle>
+            </Wrap>
+          </Link>
+          <Link style={{ textDecoration: "none" }} to={"/importance"}>
+            <Wrap
+              background={importantRoute ? "value" : ""}
+              onClick={importantTask}
+            >
+              <BlueLine b={importantRoute ? "value" : ""}></BlueLine>
+              <Icon>
+                <BsStar />
+              </Icon>
+              <TaskTitle>important</TaskTitle>
+            </Wrap>
+          </Link>
+          <Link style={{ textDecoration: "none" }} to={"/planned"}>
+            <Wrap
+              background={plannedRoute ? "value" : ""}
+              onClick={plannedFunction}
+            >
+              <BlueLine b={plannedRoute ? "value" : ""}></BlueLine>
+              <Icon>
+                <IoCalendarOutline />
+              </Icon>
+              <TaskTitle>planned</TaskTitle>
+            </Wrap>
+          </Link>
+          <Link style={{ textDecoration: "none" }} to={"assigned"}>
+            <Wrap
+              background={plannedRoute ? "value" : ""}
+              onClick={assignedFunction}
+            >
+              <BlueLine b={assignedRoute ? "value" : ""}></BlueLine>
+              <Icon>
+                <MdOutlinePersonOutline />
+              </Icon>
+              <TaskTitle>assigned to me</TaskTitle>
+            </Wrap>
+          </Link>
+          <Link style={{ textDecoration: "none" }} to={"/task"}>
+            <Wrap background={mainRoute ? "value" : ""} onClick={mainTask}>
+              <BlueLine b={mainRoute ? "value" : ""}></BlueLine>
+              <Icon>
+                <CgHome />
+              </Icon>
+              <TaskTitle>Task</TaskTitle>
+            </Wrap>
+          </Link>
         </Right>
         <Middle>
           <Routes />
