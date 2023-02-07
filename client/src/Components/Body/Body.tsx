@@ -19,7 +19,7 @@ const Body = () => {
   const [show, setShow] = React.useState(false);
   const [assignedInput, setAssignedInput] = React.useState(false);
   const assignedFunctionInput = () => {
-    setAssigned(!assignedInput);
+    setAssignedInput(!assignedInput);
   };
   const func = () => {
     setShow(!show);
