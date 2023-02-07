@@ -10,7 +10,7 @@ function App() {
   return (
     <Container>
       <AuthRoutes />
-      {context?.userData?.name === "" ? <Body /> : null}
+      {context?.userData?.name ? <Body /> : null}
     </Container>
   );
 }
