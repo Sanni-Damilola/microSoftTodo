@@ -10,7 +10,7 @@ const Routes = () => {
   const element = useRoutes([
     {
       path: "/task",
-      element: <Tasks />,
+      element: <Tasks  />,
     },
     {
       path: "/planned",

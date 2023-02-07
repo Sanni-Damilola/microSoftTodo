@@ -75,7 +75,7 @@ const Body = () => {
           <Link style={{ textDecoration: "none" }} to={"/myday"}>
             <Wrap background={route ? "value" : ""} onClick={taskRoute}>
               <BlueLine b={route ? "value" : ""}></BlueLine>
-              <Icon display={show ? "value" : ""}>
+              <Icon>
                 <HiOutlineSun />
               </Icon>
               <TaskTitle>My Day</TaskTitle>
@@ -87,7 +87,7 @@ const Body = () => {
               onClick={importantTask}
             >
               <BlueLine b={importantRoute ? "value" : ""}></BlueLine>
-              <Icon display={show ? "value" : ""}>
+              <Icon>
                 <BsStar />
               </Icon>
               <TaskTitle>important</TaskTitle>
@@ -99,7 +99,7 @@ const Body = () => {
               onClick={plannedFunction}
             >
               <BlueLine b={plannedRoute ? "value" : ""}></BlueLine>
-              <Icon display={show ? "value" : ""}>
+              <Icon>
                 <IoCalendarOutline />
               </Icon>
               <TaskTitle>planned</TaskTitle>
@@ -111,7 +111,7 @@ const Body = () => {
               onClick={assignedFunction}
             >
               <BlueLine b={assignedRoute ? "value" : ""}></BlueLine>
-              <Icon display={show ? "value" : ""}>
+              <Icon>
                 <MdOutlinePersonOutline />
               </Icon>
               <TaskTitle>assigned to me</TaskTitle>
@@ -120,7 +120,7 @@ const Body = () => {
           <Link style={{ textDecoration: "none" }} to={"/task"}>
             <Wrap background={mainRoute ? "value" : ""} onClick={mainTask}>
               <BlueLine b={mainRoute ? "value" : ""}></BlueLine>
-              <Icon display={show ? "value" : ""}>
+              <Icon>
                 <CgHome />
               </Icon>
               <TaskTitle>Task</TaskTitle>
@@ -161,8 +161,8 @@ const TaskTitle = styled.span`
   color: rgb(0, 0, 0, 0.8);
   text-transform: capitalize;
 `;
-const Icon = styled.div<{ display: string }>`
-  display: ${({ display }) => (display ? "flex" : "none")};
+const Icon = styled.div`
+  display: flex;
   justify-content: center;
   margin-left: 30px;
   align-items: center;
@@ -217,7 +217,7 @@ const ToggleMenu = styled.div<{ dn: string }>`
   margin-top: 35px;
   position: fixed;
   left: 0;
-  top: 60px;
+  top: 40px;
   font-size: 20px;
   color: rgb(0, 0, 0, 0.7);
   display: ${({ dn }) => (dn ? "block" : "none")};
