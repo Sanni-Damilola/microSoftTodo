@@ -2,9 +2,8 @@ import React from "react";
 import { HiOutlineBell } from "react-icons/hi";
 import styled from "styled-components";
 import { IoCalendarOutline, IoRepeat } from "react-icons/io5";
-import { BsStar } from "react-icons/bs";
-import { IoIosCheckmark } from "react-icons/io";
 import { CgHome } from "react-icons/cg";
+import { BsChevronDown, BsChevronRight, BsStar } from "react-icons/bs";
 import axios from "axios";
 import { allowAccess } from "../Global/GlobalContext";
 
@@ -81,11 +80,19 @@ const Tasks = () => {
         window.location.reload();
       });
   };
+  // get Completed Data
+  const filterData = userTask?.myDay?.filter((e: any) => {
+    return e.status === true;
+  });
+
+  const [complete, setComplte] = React.useState(false);
+  const Complete = () => {
+    setComplte(!complete);
+  };
 
   React.useEffect(() => {
     readAllTask();
   }, [context?.userData]);
-
   return (
     <Container>
       <Wrapper>
@@ -99,73 +106,148 @@ const Tasks = () => {
       <br />
       <br />
       <MainWrapper>
-        <AddTaskInput>
-          <Radio></Radio>
-          <Input
-            onChange={(e) => {
-              setTitle(e.target.value);
-            }}
-            color={show ? "value" : ""}
-            onClick={func}
-            placeholder="Add a Task"
-          />
-        </AddTaskInput>
-        {show ? (
-          <>
-            <Botton>
-              <Hold>
-                <ButtonIcon>
-                  <IoCalendarOutline />
-                </ButtonIcon>
-                <ButtonIcon>
-                  <HiOutlineBell />
-                </ButtonIcon>
-                <ButtonIcon>
-                  <IoRepeat />
-                </ButtonIcon>
-              </Hold>
-              {title === "" ? (
-                <Add color=" rgb(0, 0, 0, 0.5)" cur="not-allowed">
-                  add
-                </Add>
-              ) : (
-                <Add color="rgb(37, 99, 207)" cur="pointer">
-                  add
-                </Add>
-              )}
-            </Botton>
-          </>
-        ) : null}
-        {userTask?.myDay?.map((e) => (
-          <TaskView key={e._id}>
-            <ViewWrapper>
-              <CheckBox
-                onClick={() => {
-                  if (e.status) {
-                    Uncompleted(e._id);
-                  } else {
-                    completed(e._id);
-                  }
-                }}
-                checked={e.status}
-                type={"radio"}
-              />
-              <TitleHold>
-                <TaskViewTitle>{e.title}</TaskViewTitle>
-                <Task>task</Task>
-              </TitleHold>
-            </ViewWrapper>
-            <MarkAsImportant>
-              <BsStar />
-            </MarkAsImportant>
-          </TaskView>
-        ))}
+        <>
+          <AddTaskInput>
+            <Radio></Radio>
+            <Input
+              onChange={(e) => {
+                setTitle(e.target.value);
+              }}
+              color={show ? "value" : ""}
+              onClick={func}
+              placeholder="Add a Task"
+            />
+          </AddTaskInput>
+          {show ? (
+            <>
+              <Botton>
+                <Hold>
+                  <ButtonIcon>
+                    <IoCalendarOutline />
+                  </ButtonIcon>
+                  <ButtonIcon>
+                    <HiOutlineBell />
+                  </ButtonIcon>
+                  <ButtonIcon>
+                    <IoRepeat />
+                  </ButtonIcon>
+                </Hold>
+                {title === "" ? (
+                  <Add color=" rgb(0, 0, 0, 0.5)" cur="not-allowed">
+                    add
+                  </Add>
+                ) : (
+                  <Add
+                    onClick={postTask}
+                    color="rgb(37, 99, 207)"
+                    cur="pointer"
+                  >
+                    add
+                  </Add>
+                )}
+              </Botton>
+            </>
+          ) : null}
+
+          {userTask?.myDay?.map((e) => (
+            <>
+              {e.status === false ? (
+                <TaskView key={e._id}>
+                  <ViewWrapper>
+                    <CheckBox
+                      checked={e.status}
+                      onClick={() => {
+                        if (e.status) {
+                          Uncompleted(e._id);
+                        } else {
+                          completed(e._id);
+                        }
+                      }}
+                      type={"radio"}
+                    />
+                    <TitleHold>
+                      <TaskViewTitle line_through={e.status ? "value" : ""}>
+                        {e.title}
+                      </TaskViewTitle>
+                      <Task>task</Task>
+                    </TitleHold>
+                  </ViewWrapper>
+                  <MarkAsImportant>
+                    <BsStar />
+                  </MarkAsImportant>
+                </TaskView>
+              ) : null}
+            </>
+          ))}
+        </>
+        <br />
+        <Completed onClick={Complete}>
+          <ArrowIcon>
+            {complete ? <BsChevronRight /> : <BsChevronDown />}
+          </ArrowIcon>
+          <Span>Completed</Span>
+          <Length>{filterData?.length}</Length>
+        </Completed>
+        {complete ? null : (
+          <AllCompleted>
+            {filterData?.map((e) => (
+              <>
+                {e.status === true ? (
+                  <TaskView key={e._id}>
+                    <ViewWrapper>
+                      <CheckBox
+                        checked={e.status}
+                        onClick={() => {
+                          if (e.status) {
+                            Uncompleted(e._id);
+                          } else {
+                            completed(e._id);
+                          }
+                        }}
+                        type={"radio"}
+                      />
+                      <TitleHold>
+                        <TaskViewTitle line_through={e.status ? "value" : ""}>
+                          {e.title}
+                        </TaskViewTitle>
+                        <Task>task</Task>
+                      </TitleHold>
+                    </ViewWrapper>
+                    <MarkAsImportant>
+                      <BsStar />
+                    </MarkAsImportant>
+                  </TaskView>
+                ) : null}
+              </>
+            ))}
+          </AllCompleted>
+        )}
       </MainWrapper>
     </Container>
   );
 };
 
 export default Tasks;
+
+const AllCompleted = styled.div``;
+
+const Completed = styled.div`
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  width: 150px;
+`;
+const ArrowIcon = styled.div`
+  color: rgb(0, 0, 0, 0.6);
+  margin-top: 3px;
+  margin-right: 15px;
+`;
+const Span = styled.div`
+  font-weight: 600;
+`;
+const Length = styled.div`
+  margin-left: 15px;
+`;
 
 const MainWrapper = styled.div`
   overflow-y: scroll;
@@ -177,8 +259,10 @@ const MainWrapper = styled.div`
   }
 `;
 
-const TaskViewTitle = styled.span`
+const TaskViewTitle = styled.span<{ line_through: string }>`
   color: rgb(0, 0, 0, 0.6);
+  text-decoration: ${({ line_through }) =>
+    line_through ? "line-through" : ""};
 `;
 
 const CheckIcon = styled.div`

@@ -6,13 +6,81 @@ import styled from "styled-components";
 import { IoCalendarOutline, IoRepeat } from "react-icons/io5";
 import { BsStar } from "react-icons/bs";
 import { IoIosCheckmark } from "react-icons/io";
+import axios from "axios";
+import { allowAccess } from "../Global/GlobalContext";
+
+type task = {
+  _id: string;
+  title: string;
+  date: number;
+  reminder: string;
+  note: string;
+  status: boolean;
+};
+
+interface allUserTask {
+  status: false;
+  title: string;
+  note: string;
+  myDay: task[];
+  task: task[];
+  _id: string;
+}
 
 const MyDay = () => {
   const [show, setShow] = React.useState(false);
-  const [text, setText] = React.useState("");
+  const [title, setTitle] = React.useState("");
   const func = () => {
     setShow(true);
   };
+
+  const context = React.useContext(allowAccess);
+
+  // done status
+  const completed = async (id: string) => {
+    await axios
+      .patch(
+        `http://localhost:2001/api/completeTask/${context?.userData._id}/${id}`
+      )
+      .then((res) => {
+        window.location.reload();
+      });
+  };
+
+  // read task
+  // get all task
+  const [userTask, setUserTask] = React.useState({} as allUserTask);
+  const readAllTask = async () => {
+    await axios
+      .get(`http://localhost:2001/api/getone/${context?.userData._id}`)
+      .then((res) => {
+        setUserTask(res.data.data);
+      });
+  };
+
+  // post task
+  const postTask = async () => {
+    await axios
+      .post(`http://localhost:2001/api/createTask/${context?.userData._id}`, {
+        title,
+      })
+      .then((res) => {});
+  };
+
+  // unDone Task
+  const Uncompleted = async (id: string) => {
+    await axios
+      .patch(
+        `http://localhost:2001/api/uncompleteTask/${context?.userData._id}/${id}`
+      )
+      .then((res) => {
+        window.location.reload();
+      });
+  };
+
+  React.useEffect(() => {
+    readAllTask();
+  }, [context?.userData]);
 
   return (
     <Container>
@@ -30,7 +98,7 @@ const MyDay = () => {
         <Radio></Radio>
         <Input
           onChange={(e) => {
-            setText(e.target.value);
+            setTitle(e.target.value);
           }}
           color={show ? "value" : ""}
           onClick={func}
@@ -51,7 +119,7 @@ const MyDay = () => {
                 <IoRepeat />
               </ButtonIcon>
             </Hold>
-            {text === "" ? (
+            {title === "" ? (
               <Add color=" rgb(0, 0, 0, 0.5)" cur="not-allowed">
                 add
               </Add>
@@ -63,25 +131,85 @@ const MyDay = () => {
           </Botton>
         </>
       ) : null}
-      <TaskView>
-        <ViewWrapper>
-          <CheckBox>
-            <CheckIcon>
-              <IoIosCheckmark />
-            </CheckIcon>
-          </CheckBox>
-          <TitleHold>
-            <TaskViewTitle>anshb</TaskViewTitle>
-            <Task>task</Task>
-          </TitleHold>
-        </ViewWrapper>
-        <MarkAsImportant>
-          <BsStar />
-        </MarkAsImportant>
-      </TaskView>
+      <MainWrapper>
+        <>
+          <AddTaskInput>
+            <Radio></Radio>
+            <Input
+              onChange={(e) => {
+                setTitle(e.target.value);
+              }}
+              color={show ? "value" : ""}
+              onClick={func}
+              placeholder="Add a Task"
+            />
+          </AddTaskInput>
+          {show ? (
+            <Botton>
+              <Hold>
+                <ButtonIcon>
+                  <HiOutlineBell />
+                </ButtonIcon>
+                <ButtonIcon>
+                  <IoRepeat />
+                </ButtonIcon>
+              </Hold>
+
+              {title === "" ? (
+                <Add color=" rgb(0, 0, 0, 0.5)" cur="not-allowed">
+                  add
+                </Add>
+              ) : (
+                <Add onClick={postTask} color="rgb(37, 99, 207)" cur="pointer">
+                  add
+                </Add>
+              )}
+            </Botton>
+          ) : null}
+
+          {userTask?.myDay?.map((e) => (
+            <TaskView key={e._id}>
+              <ViewWrapper>
+                <CheckBox
+                  checked={e.status}
+                  onClick={() => {
+                    if (e.status) {
+                      Uncompleted(e._id);
+                    } else {
+                      completed(e._id);
+                    }
+                  }}
+                  type={"radio"}
+                />
+                {/* <CheckIcon>
+                    <IoIosCheckmark />
+                  </CheckIcon> */}
+                {/* </CheckBox> */}
+                <TitleHold>
+                  <TaskViewTitle>{e.title}</TaskViewTitle>
+                  <Task>task</Task>
+                </TitleHold>
+              </ViewWrapper>
+              <MarkAsImportant>
+                <BsStar />
+              </MarkAsImportant>
+            </TaskView>
+          ))}
+        </>
+      </MainWrapper>
     </Container>
   );
 };
+
+const MainWrapper = styled.div`
+  overflow-y: scroll;
+  height: auto;
+  width: 100%;
+  padding-bottom: 20px;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+`;
 
 export default MyDay;
 
@@ -116,7 +244,7 @@ const TitleHold = styled.div`
   align-items: center;
   margin-left: 15px;
 `;
-const CheckBox = styled.div`
+const CheckBox = styled.input`
   width: 17px;
   cursor: pointer;
   border-radius: 50%;
