@@ -1,11 +1,11 @@
 import React from "react";
 import SignUp from "./Components/Auth/SignUp";
-import SideBar from "./Components/SideBar/SideBar";
+import AuthRoutes from "./Components/Routes/AuthRoutes";
 
 function App() {
   return (
     <div>
-      <SignUp />
+      <AuthRoutes />
       <SideBar />
     </div>
   );
