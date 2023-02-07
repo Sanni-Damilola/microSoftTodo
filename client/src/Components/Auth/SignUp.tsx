@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import img from "../Images/image.svg";
@@ -19,7 +20,10 @@ const SignIn = () => {
         <br />
         <br />
         <CreatAccoount>
-          No account? <p>Create one!</p>
+          No account?{" "}
+          <Link style={{ textDecoration: "non" }} to={"/signin"}>
+            <p>Create one!</p>
+          </Link>
         </CreatAccoount>
         <CantAccess>Cant't access your account?</CantAccess>
         <br />

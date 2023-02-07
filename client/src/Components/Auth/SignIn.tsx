@@ -3,9 +3,9 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import img from "../Images/image.svg";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import { Link } from "react-router-dom";
 
 const SignIn = () => {
-  const [email, setEmail] = React.useState("");
   const [input, setInput] = React.useState(false);
   const eye = () => {
     setInput(!input);
@@ -19,20 +19,13 @@ const SignIn = () => {
         <Image src={img} />
         <br />
         <br />
-        <span>Create account</span>
+        <Link style={{ textDecoration: "none" }} to={"/"}>
+          <span>Create account</span>
+        </Link>
         <br />
         <br />
         <Input type="text" minLength={6} placeholder="name" /> <br />
-        <Input
-          value={email}
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }}
-          required
-          type="email"
-          placeholder="someone@example.com"
-        />{" "}
-        <br />
+        <Input required type="email" placeholder="someone@example.com" /> <br />
         <Password>
           <PasswordInput
             required
