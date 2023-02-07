@@ -1,21 +1,25 @@
 import React from "react";
 
-import { HiOutlineBell, HiOutlineSun } from "react-icons/hi";
+import { HiOutlineBell } from "react-icons/hi";
 import styled from "styled-components";
 import { IoCalendarOutline, IoRepeat } from "react-icons/io5";
 import { BsStar } from "react-icons/bs";
 import { IoIosCheckmark } from "react-icons/io";
-import { CgHome } from "react-icons/cg";
 
 const Planned = () => {
+  const [show, setShow] = React.useState(false);
+  const [text, setText] = React.useState("");
+  const func = () => {
+    setShow(true);
+  };
   return (
     <Container>
       <Wrapper>
         <Wrap>
           <Icon>
-            <CgHome />
+            <IoCalendarOutline />
           </Icon>
-          <TaskTitle>task</TaskTitle>
+          <TaskTitle>planned</TaskTitle>
         </Wrap>
       </Wrapper>
       <br />
