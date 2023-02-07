@@ -1,4 +1,4 @@
-import React, { createContext } from "react";
+import React, { createContext, PropsWithChildren } from "react";
 
 interface user {
   email: string;
@@ -6,12 +6,24 @@ interface user {
   _id: string;
 }
 
-interface userData {}
+interface userData {
+  userData: user;
+  setUserData: React.Dispatch<React.SetStateAction<user>>;
+}
 
-const allowAccess = createContext(null);
+export const allowAccess = createContext<userData | null>(null);
 
-export const GlobalContext = () => {
-  const [userData, setUserData] = React.useState(initialState);
+export const GlobalContext: React.FC<PropsWithChildren> = ({ children }) => {
+  const [userData, setUserData] = React.useState({} as user);
 
-  return <div>GlobalContext</div>;
+  return (
+    <allowAccess.Provider
+      value={{
+        userData,
+        setUserData,
+      }}
+    >
+      {children}
+    </allowAccess.Provider>
+  );
 };
