@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Header from "../Header/Header";
+import { HiOutlineSun } from "react-icons/hi";
 
 const Body = () => {
   const [show, setShow] = React.useState(false);
@@ -13,11 +14,13 @@ const Body = () => {
       <Header />
       <Wrapper>
         <Right dn={show ? "" : "value"}>
-          <Container>
+          <Wrap>
             <BlueLine></BlueLine>
-            <Icon></Icon>
-            <TaskTitle></TaskTitle>
-          </Container>
+            <Icon>
+              <HiOutlineSun />
+            </Icon>
+            <TaskTitle>My Day</TaskTitle>
+          </Wrap>
         </Right>
         <Middle></Middle>
         <Left></Left>
@@ -58,8 +61,8 @@ const Icon = styled.div`
   margin-left: 30px;
   align-items: center;
   color: rgb(0, 0, 0, 0.6);
-  font-size: 2;
-  margin-right: 2;
+  font-size: 20px;
+  margin-right: 23px;
   margin-top: 5px;
 `;
 const Wrap = styled.div`
