@@ -1,10 +1,16 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import img from "../Images/image.svg";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import { Link } from "react-router-dom";
 
-const SignIn = () => {
+const SignUp = () => {
+  const [input, setInput] = React.useState(false);
+  const eye = () => {
+    setInput(!input);
+  };
+
   return (
     <Container>
       <Card>
@@ -13,34 +19,100 @@ const SignIn = () => {
         <Image src={img} />
         <br />
         <br />
-        <span>Sign in</span>
+        <Link style={{ textDecoration: "none" }} to={"/signin"}>
+          <span>Create account</span>
+        </Link>
         <br />
         <br />
-        <Input required type="email" placeholder="dami@example.com" /> <br />
+        <Input type="text" minLength={6} placeholder="name" /> <br />
+        <Input required type="email" placeholder="sanni@example.com" /> <br />
+        <Password>
+          <PasswordInput
+            required
+            type={input ? "text" : "password"}
+            placeholder="password"
+            minLength={6}
+          />
+
+          {input ? (
+            <IconEye onClick={eye}>
+              <AiFillEye />
+            </IconEye>
+          ) : (
+            <IconeEyeCancel onClick={eye}>
+              <AiFillEyeInvisible />
+            </IconeEyeCancel>
+          )}
+        </Password>
         <br />
-        <br />
-        <CreatAccoount>
-          No account?{" "}
-          <Link style={{ textDecoration: "non" }} to={"/signin"}>
-            <p>Create one!</p>
-          </Link>
-        </CreatAccoount>
-        <CantAccess>Cant't access your account?</CantAccess>
-        <br />
-        <Wrapper>
-          <Button hover="" c="black" bg="rgb(178,178,178)">
-            Back
-          </Button>
-          <Button hover="" c="white" bg="#0067b8">
-            Next
-          </Button>
-        </Wrapper>
+        <Button type="submit">Next</Button>
       </Card>
     </Container>
   );
 };
 
-export default SignIn;
+export default SignUp;
+
+const Curve = styled.div`
+  width: 150px;
+  i {
+    padding-top: 10px;
+    color: white;
+  }
+  height: 60px;
+  background-color: #0067b8;
+  position: relative;
+  display: flex;
+  border-radius: 2px;
+  justify-content: center;
+  ::after {
+    background-color: #0067b8;
+    content: "";
+    left: 4%;
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    transform: rotate(45deg);
+    margin-top: -7px;
+  }
+`;
+
+const PasswordInput = styled.input`
+  outline: 0;
+  border: 0;
+  width: 90%;
+  padding-bottom: 10px;
+  ::placeholder {
+    font-size: 16px;
+    font-weight: 450;
+  }
+`;
+
+const Password = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-between;
+  width: 410px;
+  border-bottom: 1px solid rgb(0, 0, 0, 0.6);
+`;
+const IconEye = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(0, 0, 0, 0.5);
+  font-size: 20px;
+  cursor: pointer;
+`;
+const IconeEyeCancel = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(0, 0, 0, 0.5);
+
+  font-size: 20px;
+  cursor: pointer;
+`;
 
 const Container = styled.div`
   width: 100%;
@@ -85,50 +157,18 @@ const Input = styled.input`
   }
 `;
 
-const Button = styled.button<{ bg: string; c: string; hover: string }>`
+const Button = styled.button`
+  background-color: #0067b8;
   padding: 10px 40px;
   font-size: 14px;
-  color: ${(props) => props.c};
+  color: white;
   border: 0;
-  margin: 5px;
-  cursor: pointer;
-  background-color: ${(props) => props.bg};
-
-  :hover {
-    background-color: ${(props) => props.hover};
-  }
-`;
-
-const Wrapper = styled.div`
-  display: flex;
   float: right;
-  margin-right: 45px;
-`;
-
-const CreatAccoount = styled.p`
-  display: flex;
-  margin: 0;
-  align-items: center;
-  color: rgb(102, 102, 102);
-  P {
-    color: rgb(0, 103, 184);
-    padding-left: 3px;
-    cursor: pointer;
-    width: 90px;
-    transition: all 350ms;
-    :hover {
-      text-decoration: underline;
-    }
-  }
-`;
-
-const CantAccess = styled.p`
-  margin: 0;
-  color: rgb(0, 103, 184);
+  margin-right: 56px;
   cursor: pointer;
-  width: 200px;
-  transition: all 350ms;
+
   :hover {
     text-decoration: underline;
+    background-color: #0067b8;
   }
 `;
