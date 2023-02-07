@@ -1,12 +1,12 @@
 import React from "react";
 import AuthRoutes from "./Components/Routes/AuthRoutes";
-import SideBar from "./Components/SideBar/SideBar";
+import Body from "./Components/Body/Body";
 
 function App() {
   return (
     <div>
-      <AuthRoutes />
-      <SideBar />
+      {/* <AuthRoutes /> */}
+      <Body />
     </div>
   );
 }
