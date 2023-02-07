@@ -2,6 +2,7 @@ import React from "react";
 import { useRoutes } from "react-router-dom";
 import SignUp from "../Auth/SignUp";
 import SignIn from "../Auth/SignIn";
+import Body from "../Body/Body";
 
 const AuthRoutes = () => {
   const element = useRoutes([
@@ -12,6 +13,10 @@ const AuthRoutes = () => {
     {
       path: "/signin",
       element: <SignIn />,
+    },
+    {
+      path: "/body",
+      element: <Body />,
     },
   ]);
 

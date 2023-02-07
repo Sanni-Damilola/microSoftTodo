@@ -20,7 +20,7 @@ const SignIn = () => {
           "microSoftData",
           JSON.stringify(res.data.data)
         );
-        navigate("/task");
+        navigate("/body");
       })
       .catch((err: any) => {
         alert("User not found");
@@ -38,7 +38,16 @@ const SignIn = () => {
         <span>Sign in</span>
         <br />
         <br />
-        <Input required type="email" placeholder="dami@example.com" /> <br />
+        <Input
+          value={email}
+          onChange={(e) => {
+            setEmail(e.target.value);
+          }}
+          required
+          type="email"
+          placeholder="dami@example.com"
+        />{" "}
+        <br />
         <br />
         <br />
         <CreatAccoount>
