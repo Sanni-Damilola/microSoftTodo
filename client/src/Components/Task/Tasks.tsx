@@ -103,7 +103,7 @@ const Tasks = () => {
           <Radio></Radio>
           <Input
             onChange={(e) => {
-              setText(e.target.value);
+              setTitle(e.target.value);
             }}
             color={show ? "value" : ""}
             onClick={func}
@@ -124,7 +124,7 @@ const Tasks = () => {
                   <IoRepeat />
                 </ButtonIcon>
               </Hold>
-              {text === "" ? (
+              {title === "" ? (
                 <Add color=" rgb(0, 0, 0, 0.5)" cur="not-allowed">
                   add
                 </Add>
@@ -136,22 +136,30 @@ const Tasks = () => {
             </Botton>
           </>
         ) : null}
-        <TaskView>
-          <ViewWrapper>
-            <CheckBox>
-              <CheckIcon>
-                <IoIosCheckmark />
-              </CheckIcon>
-            </CheckBox>
-            <TitleHold>
-              <TaskViewTitle>anshb</TaskViewTitle>
-              <Task>task</Task>
-            </TitleHold>
-          </ViewWrapper>
-          <MarkAsImportant>
-            <BsStar />
-          </MarkAsImportant>
-        </TaskView>
+        {userTask?.myDay?.map((e) => (
+          <TaskView key={e._id}>
+            <ViewWrapper>
+              <CheckBox
+                onClick={() => {
+                  if (e.status) {
+                    Uncompleted(e._id);
+                  } else {
+                    completed(e._id);
+                  }
+                }}
+                checked={e.status}
+                type={"radio"}
+              />
+              <TitleHold>
+                <TaskViewTitle>{e.title}</TaskViewTitle>
+                <Task>task</Task>
+              </TitleHold>
+            </ViewWrapper>
+            <MarkAsImportant>
+              <BsStar />
+            </MarkAsImportant>
+          </TaskView>
+        ))}
       </MainWrapper>
     </Container>
   );
@@ -200,7 +208,7 @@ const TitleHold = styled.div`
   align-items: center;
   margin-left: 15px;
 `;
-const CheckBox = styled.div`
+const CheckBox = styled.input`
   width: 17px;
   cursor: pointer;
   border-radius: 50%;
