@@ -5,7 +5,11 @@ import img from "../Images/image.svg";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
 const SignIn = () => {
+  const [email, setEmail] = React.useState("");
   const [input, setInput] = React.useState(false);
+  const eye = () => {
+    setInput(!input);
+  };
 
   return (
     <Container>
@@ -18,15 +22,7 @@ const SignIn = () => {
         <span>Create account</span>
         <br />
         <br />
-        <Input
-          onChange={(e) => {
-            setFullName(e.target.value);
-          }}
-          type="text"
-          minLength={6}
-          placeholder="name"
-        />{" "}
-        <br />
+        <Input type="text" minLength={6} placeholder="name" /> <br />
         <Input
           value={email}
           onChange={(e) => {
