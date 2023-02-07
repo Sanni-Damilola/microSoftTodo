@@ -5,6 +5,24 @@ import { IoCalendarOutline, IoRepeat } from "react-icons/io5";
 import { BsStar } from "react-icons/bs";
 import { IoIosCheckmark } from "react-icons/io";
 
+type task = {
+  _id: string;
+  title: string;
+  date: number;
+  reminder: string;
+  note: string;
+  status: boolean;
+};
+
+interface allUserTask {
+  status: false;
+  title: string;
+  note: string;
+  myDay: task[];
+  task: task[];
+  _id: string;
+}
+
 const Importance = () => {
   const [show, setShow] = React.useState(false);
   const [text, setText] = React.useState("");

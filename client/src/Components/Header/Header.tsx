@@ -5,9 +5,12 @@ import { VscSearch } from "react-icons/vsc";
 import { SlSettings } from "react-icons/sl";
 import { RiQuestionMark } from "react-icons/ri";
 import { AiOutlineNotification } from "react-icons/ai";
+import { allowAccess } from "../Global/GlobalContext";
 
 const Header = () => {
   const [show, setShow] = React.useState(false);
+
+  const context = React.useContext(allowAccess);
 
   const func = () => {
     setShow(true);
@@ -52,7 +55,7 @@ const Header = () => {
           <AiOutlineNotification />
         </Notification>
         <NameWrap>
-          <Name>e</Name>
+          <Name>{context?.userData?.email?.charAt(0)}</Name>
         </NameWrap>
       </Left>
     </Container>

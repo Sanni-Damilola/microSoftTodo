@@ -14,10 +14,6 @@ const AuthRoutes = () => {
       path: "/signin",
       element: <SignIn />,
     },
-    {
-      path: "/body",
-      element: <Body />,
-    },
   ]);
 
   return element;

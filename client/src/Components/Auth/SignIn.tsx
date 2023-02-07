@@ -20,7 +20,7 @@ const SignIn = () => {
           "microSoftData",
           JSON.stringify(res.data.data)
         );
-        navigate("/body");
+        navigate("/myday");
       })
       .catch((err: any) => {
         alert("User not found");

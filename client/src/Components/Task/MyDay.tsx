@@ -133,17 +133,6 @@ const MyDay = () => {
       ) : null}
       <MainWrapper>
         <>
-          <AddTaskInput>
-            <Radio></Radio>
-            <Input
-              onChange={(e) => {
-                setTitle(e.target.value);
-              }}
-              color={show ? "value" : ""}
-              onClick={func}
-              placeholder="Add a Task"
-            />
-          </AddTaskInput>
           {show ? (
             <Botton>
               <Hold>
