@@ -1,11 +1,10 @@
 import React from "react";
-import { HiOutlineBell, HiOutlineSun } from "react-icons/hi";
-import { RiArrowUpDownLine } from "react-icons/ri";
-import { TfiLightBulb } from "react-icons/tfi";
+import { HiOutlineBell } from "react-icons/hi";
 import styled from "styled-components";
 import { IoCalendarOutline, IoRepeat } from "react-icons/io5";
 import { BsStar } from "react-icons/bs";
 import { IoIosCheckmark } from "react-icons/io";
+import { CgHome } from "react-icons/cg";
 
 const Tasks = () => {
   const [show, setShow] = React.useState(false);
@@ -19,9 +18,9 @@ const Tasks = () => {
       <Wrapper>
         <Wrap>
           <Icon>
-            <HiOutlineSun />
+            <CgHome />
           </Icon>
-          <TaskTitle>my day</TaskTitle>
+          <TaskTitle>task</TaskTitle>
         </Wrap>
       </Wrapper>
       <br />

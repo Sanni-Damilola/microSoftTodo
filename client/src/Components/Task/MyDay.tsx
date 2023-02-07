@@ -18,7 +18,9 @@ const MyDay = () => {
     <Container>
       <Wrapper>
         <Wrap>
-          <Icon>{/* <HiOutlineSun /> */}</Icon>
+          <Icon>
+            <HiOutlineSun />
+          </Icon>
           <TaskTitle>my day</TaskTitle>
         </Wrap>
       </Wrapper>
