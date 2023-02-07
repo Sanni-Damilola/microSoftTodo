@@ -17,7 +17,7 @@ import { FaRegUserCircle } from "react-icons/fa";
 import { GoSignOut } from "react-icons/go";
 
 const Body = () => {
-  const [show, setShow] = React.useState(false);
+  const [show, setShow] = React.useState(true);
   const [assignedInput, setAssignedInput] = React.useState(false);
   const assignedFunctionInput = () => {
     setAssignedInput(!assignedInput);

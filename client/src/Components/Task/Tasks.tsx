@@ -42,7 +42,9 @@ const Tasks = () => {
       .post(`http://localhost:2001/api/createTask/${context?.userData._id}`, {
         title,
       })
-      .then((res) => {});
+      .then((res) => {
+        window.location.reload();
+      });
   };
 
   // read task

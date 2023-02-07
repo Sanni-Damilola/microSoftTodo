@@ -133,28 +133,6 @@ const MyDay = () => {
       ) : null}
       <MainWrapper>
         <>
-          {show ? (
-            <Botton>
-              <Hold>
-                <ButtonIcon>
-                  <HiOutlineBell />
-                </ButtonIcon>
-                <ButtonIcon>
-                  <IoRepeat />
-                </ButtonIcon>
-              </Hold>
-
-              {title === "" ? (
-                <Add color=" rgb(0, 0, 0, 0.5)" cur="not-allowed">
-                  add
-                </Add>
-              ) : (
-                <Add onClick={postTask} color="rgb(37, 99, 207)" cur="pointer">
-                  add
-                </Add>
-              )}
-            </Botton>
-          ) : null}
 
           {userTask?.myDay?.map((e) => (
             <TaskView key={e._id}>

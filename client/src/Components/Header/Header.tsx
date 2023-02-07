@@ -55,7 +55,7 @@ const Header = () => {
           <AiOutlineNotification />
         </Notification>
         <NameWrap>
-          <Name>{context?.userData?.email?.charAt(0)}</Name>
+          <Name>{context?.userData?.name?.charAt(0)}</Name>
         </NameWrap>
       </Left>
     </Container>
