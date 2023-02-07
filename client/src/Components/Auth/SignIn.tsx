@@ -1,3 +1,4 @@
+import axios from "axios";
 import React from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -5,9 +6,30 @@ import styled from "styled-components";
 import img from "../Images/image.svg";
 
 const SignIn = () => {
+  const [email, setEmail] = React.useState("");
+
+  const navigate = useNavigate();
+  const signInUser = async (e: any) => {
+    e.preventDefault();
+    await axios
+      .post("http://localhost:2001/api/login", {
+        email,
+      })
+      .then((res) => {
+        let captureData = window.localStorage.setItem(
+          "microSoftData",
+          JSON.stringify(res.data.data)
+        );
+        navigate("/task");
+      })
+      .catch((err: any) => {
+        alert("User not found");
+      });
+  };
+
   return (
     <Container>
-      <Card>
+      <Card onSubmit={signInUser}>
         <br />
         <br />
         <Image src={img} />
@@ -31,7 +53,7 @@ const SignIn = () => {
           <Button hover="" c="black" bg="rgb(178,178,178)">
             Back
           </Button>
-          <Button hover="" c="white" bg="#0067b8">
+          <Button type="submit" hover="" c="white" bg="#0067b8">
             Next
           </Button>
         </Wrapper>

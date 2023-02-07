@@ -37,7 +37,7 @@ const SignUp = () => {
 
   return (
     <Container>
-      <Card>
+      <Card onSubmit={registerUser}>
         <br />
         <br />
         <Image src={img} />
@@ -48,11 +48,34 @@ const SignUp = () => {
         </Link>
         <br />
         <br />
-        <Input type="text" minLength={6} placeholder="name" /> <br />
-        <Input required type="email" placeholder="sanni@example.com" /> <br />
+        <Input
+          required
+          value={fullName}
+          onChange={(e) => {
+            setFullName(e.target.value);
+          }}
+          type="text"
+          minLength={6}
+          placeholder="name"
+        />{" "}
+        <br />
+        <Input
+          required
+          value={email}
+          onChange={(e) => {
+            setEmail(e.target.value);
+          }}
+          type="email"
+          placeholder="sanni@example.com"
+        />{" "}
+        <br />
         <Password>
           <PasswordInput
             required
+            value={password}
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
             type={input ? "text" : "password"}
             placeholder="password"
             minLength={6}
